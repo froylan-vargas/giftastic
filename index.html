@@ -1,14 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Giftastic</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
 </head>
+
 <body>
+    <header class="text-center">
+        <h1>Giftastic emotions</h1>
+    </header>
+
+    
+
+    
+    <section id="categories">
+        <div class="row">
+            <div class="col-8 text-left buttons-view-column">
+                <div id="buttons-view"></div>
+            </div>
+            <div class="col-4 text-center colLimitRequest">
+                <div class="vertical">
+                    <h6>Gifs to display</h6>
+                    <select id="limitRequest">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="addCategory" class="vertical">
+        <form id="category-form">
+            <label for="category-input">Add a new emotion</label>
+            <input type="text" id="category-input">
+            <input id="add-category" class="btn btn-primary" type="submit" value="Add!">
+        </form>
+    </section>
+
+    <section id="favorites" class="text-center">
+        <h3>Favorite stored gifs</h3>
+        <div id="favoriteGifs">
+            <div class="gifComponent">
+                <img  src="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                    alt="gif" data-state="still" data-still="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                    data-animate="https://media3.giphy.com/media/VILJHh5AodVIs/giphy-tumblr.gif?cid=e1bb72ff5ba9126f2e78474945d85685">
+                <div>
+                    <i class="icon far fa-window-close"></i>
+                    <i class="icon fas fa-file-download"></i>
+                    <i class="icon far fa-copy"></i>
+                </div>
+            </div>
+            
+            <div class="gifComponent">
+                    <img  src="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                        alt="gif" data-state="still" data-still="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                        data-animate="https://media3.giphy.com/media/VILJHh5AodVIs/giphy-tumblr.gif?cid=e1bb72ff5ba9126f2e78474945d85685">
+                    <div>
+                        <i class="icon far fa-window-close"></i>
+                        <i class="icon fas fa-file-download"></i>
+                        <i class="icon far fa-copy"></i>
+                    </div>
+                </div>
+
+                <div class="gifComponent">
+                        <img  src="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                            alt="gif" data-state="still" data-still="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                            data-animate="https://media3.giphy.com/media/VILJHh5AodVIs/giphy-tumblr.gif?cid=e1bb72ff5ba9126f2e78474945d85685">
+                        <div>
+                            <i class="icon far fa-window-close"></i>
+                            <i class="icon fas fa-file-download"></i>
+                            <i class="icon far fa-copy"></i>
+                        </div>
+                    </div>
+
+                    <div class="gifComponent">
+                            <img  src="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                                alt="gif" data-state="still" data-still="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                                data-animate="https://media3.giphy.com/media/VILJHh5AodVIs/giphy-tumblr.gif?cid=e1bb72ff5ba9126f2e78474945d85685">
+                            <div>
+                                <i class="icon far fa-window-close"></i>
+                                <i class="icon fas fa-file-download"></i>
+                                <i class="icon far fa-copy"></i>
+                            </div>
+                        </div>
+
+                        <div class="gifComponent">
+                                <img  src="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                                    alt="gif" data-state="still" data-still="https://media3.giphy.com/media/VILJHh5AodVIs/200_s.gif?cid=e1bb72ff5ba9126f2e78474945d85685"
+                                    data-animate="https://media3.giphy.com/media/VILJHh5AodVIs/giphy-tumblr.gif?cid=e1bb72ff5ba9126f2e78474945d85685">
+                                <div>
+                                    <i class="icon far fa-window-close"></i>
+                                    <i class="icon fas fa-file-download"></i>
+                                    <i class="icon far fa-copy"></i>
+                                </div>
+                            </div>
+            
+
+        </div>
+    </section>
+
+    <section id='gifsSection'>
+        <div id="gifComponents" class="row text-center">
+
+        </div>
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./javascript/app.js"></script>
 </body>
+
 </html>
