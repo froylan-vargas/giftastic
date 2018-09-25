@@ -27,7 +27,7 @@ $(document).ready(function () {
         });
     }
 
-    function renderStoredFavGifs(){
+    function renderStoredFavGifs() {
         favoriteGifs = JSON.parse(localStorage.getItem("favoriteGifs") || "[]");
         favoriteGifs.forEach(gif => {
             appendGifComponent(gif, true);
@@ -41,11 +41,11 @@ $(document).ready(function () {
     }
 
     function createGifComponent(gif, isFav) {
-        const { rating, image, iconsDiv } = createGifComponentElements(gif, isFav);        
-        var divToReturn = $("<div>").addClass("gifComponent").attr("gifid", gif.id); 
-        isFav ? divToReturn.append(image, iconsDiv) : 
+        const { rating, image, iconsDiv } = createGifComponentElements(gif, isFav);
+        var divToReturn = $("<div>").addClass("gifComponent").attr("gifid", gif.id);
+        isFav ? divToReturn.append(image, iconsDiv) :
             divToReturn.addClass("col-6 col-sm-4 col-md-3")
-            .append (rating,image,iconsDiv); 
+                .append(rating, image, iconsDiv);
         return divToReturn;
     }
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
             .on('click', gifClickHandler)
     }
 
-    function createIconsDiv(gif,isFav) {
+    function createIconsDiv(gif, isFav) {
         var iconsDiv = $('<div>');
         var { favoriteIcon, downloadIcon, copyIcon } = createIconElements(isFav, gif);
         iconsDiv.append(favoriteIcon, downloadIcon, copyIcon);
@@ -80,8 +80,10 @@ $(document).ready(function () {
         addFavoriteIconAttributes(favoriteIcon, gif);
         var downloadIcon = $('<i>').addClass("icon fas fa-file-download")
             .on("click", iconDownloadHandler);
-        addDownloadIconAttributess(downloadIcon, gif);
-        var copyIcon = $('<i>').addClass("icon far fa-copy");
+        addAnimateAttribute(downloadIcon, gif);
+        var copyIcon = $('<i>').addClass("icon far fa-copy")
+            .on("click", iconCopyHandler);
+        addAnimateAttribute(copyIcon, gif);
         return { favoriteIcon, downloadIcon, copyIcon };
     }
 
@@ -92,9 +94,8 @@ $(document).ready(function () {
         favoriteIcon.attr("gifid", gif.id)
     }
 
-    function addDownloadIconAttributess(downloadIcon, gif)
-    {
-        downloadIcon.attr("animateUrl", gif.animateUrl)
+    function addAnimateAttribute(icon, gif) {
+        icon.attr("animateUrl", gif.animateUrl)
     }
 
     function createButton(category) {
@@ -124,7 +125,7 @@ $(document).ready(function () {
         }
     };
 
-    function iconDownloadHandler(){
+    function iconDownloadHandler() {
         var gifUrl = $(this).attr("animateurl");
         $.ajax({
             url: gifUrl,
@@ -143,6 +144,15 @@ $(document).ready(function () {
         });
     }
 
+    function iconCopyHandler() {
+        var value = $(this).attr("animateurl");
+        var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val(value).select();
+          document.execCommand("copy");
+          $temp.remove();
+    }
+
     function gifClickHandler() {
         var gif = $(this);
         var gifState = gif.attr("data-state");
@@ -154,15 +164,15 @@ $(document).ready(function () {
         const stillUrl = $(this).attr("stillUrl");
         const animateUrl = $(this).attr("animateUrl");
         const id = $(this).attr("gifId");
-        const gif = {id, stillUrl, animateUrl, rating}; 
+        const gif = { id, stillUrl, animateUrl, rating };
         favoriteGifs.push(gif);
         saveToLocalStorage(favoriteGifs);
         appendGifComponent(gif, true);
     }
 
     function removeFromFavHandler() {
-        var gifId = $(this).attr("gifId"); 
-        favoriteGifs =  deleteFromArray(favoriteGifs ,gifId);
+        var gifId = $(this).attr("gifId");
+        favoriteGifs = deleteFromArray(favoriteGifs, gifId);
         var elementToDelete = $(`#favoriteGifs div.gifComponent[gifid = "${gifId}"]`);
         elementToDelete.remove();
         saveToLocalStorage(favoriteGifs);
@@ -176,16 +186,15 @@ $(document).ready(function () {
         gif.attr("data-state", attributeFilter);
     }
 
-    function saveToLocalStorage(element){
+    function saveToLocalStorage(element) {
         localStorage.setItem('favoriteGifs', JSON.stringify(element));
     }
 
-    function deleteFromArray(array, id){
-        return array.filter(elem=>{
+    function deleteFromArray(array, id) {
+        return array.filter(elem => {
             return elem.id !== id;
         });
     }
-
 
     //GiphyAPI
     function createGiphyUrl(category) {
@@ -205,7 +214,7 @@ $(document).ready(function () {
     function giphyResponseHandler(gifs) {
         gifs.data.forEach(gif => {
             const gifObject = {
-                id : gif.id,
+                id: gif.id,
                 stillUrl: gif.images.fixed_height_still.url,
                 animateUrl: gif.images.downsized.url,
                 rating: gif.rating
