@@ -201,7 +201,7 @@ $(document).ready(function () {
         const giphyUrl = "https://api.giphy.com/v1/gifs/search?";
         const limit = $("#limitRequest").val();
         const key = "dc6zaTOxFJmzC";
-        return `${giphyUrl}api_key=${key}&q=${category}&rating=g&limit=${limit}`;
+        return `${giphyUrl}api_key=${key}&q=${category}&limit=${limit}`;
     }
 
     function giphyCall(queryUrl) {
