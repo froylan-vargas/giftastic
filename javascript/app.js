@@ -80,7 +80,7 @@ $(document).ready(function () {
         addFavoriteIconAttributes(favoriteIcon, gif);
         var downloadIcon = $('<i>').addClass("icon fas fa-file-download")
             .on("click", iconDownloadHandler);
-        addDownloadIconAttributess(downloadIcon);
+        addDownloadIconAttributess(downloadIcon, gif);
         var copyIcon = $('<i>').addClass("icon far fa-copy");
         return { favoriteIcon, downloadIcon, copyIcon };
     }
@@ -92,10 +92,9 @@ $(document).ready(function () {
         favoriteIcon.attr("gifid", gif.id)
     }
 
-    function addDownloadIconAttributess(downloadIcon)
+    function addDownloadIconAttributess(downloadIcon, gif)
     {
-        downloadIcon.attr({target: '_blank', 
-            href  : 'https://media0.giphy.com/media/3ofT5IfRCkWMKC0jte/200_s.gif?cid=e1bb72ff5ba973d957426a56550d83ce'});
+        downloadIcon.attr("animateUrl", gif.animateUrl)
     }
 
     function createButton(category) {
@@ -126,7 +125,22 @@ $(document).ready(function () {
     };
 
     function iconDownloadHandler(){
-       
+        var gifUrl = $(this).attr("animateurl");
+        $.ajax({
+            url: gifUrl,
+            method: 'GET',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (data) {
+                var a = document.createElement('a');
+                var url = window.URL.createObjectURL(data);
+                a.href = url;
+                a.download = 'gif.gif';
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }
+        });
     }
 
     function gifClickHandler() {
