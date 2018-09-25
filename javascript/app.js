@@ -16,6 +16,8 @@ $(document).ready(function () {
     var favoriteGifs = [];
 
     function start() {
+        var storedCategories = getCategoriesFromStorage();
+        categories = storedCategories.length > 1 ? storedCategories  : categories;
         renderButtons();
         renderStoredFavGifs();
     }
@@ -27,6 +29,11 @@ $(document).ready(function () {
         });
     }
 
+    function getCategoriesFromStorage(){
+        var categories = JSON.parse(localStorage.getItem("categories") || "[]");
+        return categories; 
+    }
+    
     function renderStoredFavGifs() {
         favoriteGifs = JSON.parse(localStorage.getItem("favoriteGifs") || "[]");
         favoriteGifs.forEach(gif => {
@@ -120,6 +127,7 @@ $(document).ready(function () {
         var category = $("#category-input").val().trim();
         if (category.length) {
             categories.push(category);
+            saveToLocalStorage('categories',categories);
             createButton(category);
             $("#category-input").val("");
         }
@@ -166,7 +174,7 @@ $(document).ready(function () {
         const id = $(this).attr("gifId");
         const gif = { id, stillUrl, animateUrl, rating };
         favoriteGifs.push(gif);
-        saveToLocalStorage(favoriteGifs);
+        saveToLocalStorage('favoriteGifs', favoriteGifs);
         appendGifComponent(gif, true);
     }
 
@@ -175,7 +183,7 @@ $(document).ready(function () {
         favoriteGifs = deleteFromArray(favoriteGifs, gifId);
         var elementToDelete = $(`#favoriteGifs div.gifComponent[gifid = "${gifId}"]`);
         elementToDelete.remove();
-        saveToLocalStorage(favoriteGifs);
+        saveToLocalStorage('favoriteGifs', favoriteGifs);
     }
 
     //Helpers
@@ -186,8 +194,8 @@ $(document).ready(function () {
         gif.attr("data-state", attributeFilter);
     }
 
-    function saveToLocalStorage(element) {
-        localStorage.setItem('favoriteGifs', JSON.stringify(element));
+    function saveToLocalStorage(key, element) {
+        localStorage.setItem(key, JSON.stringify(element));
     }
 
     function deleteFromArray(array, id) {
