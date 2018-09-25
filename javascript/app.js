@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     function start() {
         var storedCategories = getCategoriesFromStorage();
-        categories = storedCategories.length > 1 ? storedCategories  : categories;
+        categories = storedCategories.length > 1 ? storedCategories : categories;
         renderButtons();
         renderStoredFavGifs();
     }
@@ -29,11 +29,11 @@ $(document).ready(function () {
         });
     }
 
-    function getCategoriesFromStorage(){
+    function getCategoriesFromStorage() {
         var categories = JSON.parse(localStorage.getItem("categories") || "[]");
-        return categories; 
+        return categories;
     }
-    
+
     function renderStoredFavGifs() {
         favoriteGifs = JSON.parse(localStorage.getItem("favoriteGifs") || "[]");
         favoriteGifs.forEach(gif => {
@@ -127,7 +127,7 @@ $(document).ready(function () {
         var category = $("#category-input").val().trim();
         if (category.length) {
             categories.push(category);
-            saveToLocalStorage('categories',categories);
+            saveToLocalStorage('categories', categories);
             createButton(category);
             $("#category-input").val("");
         }
@@ -154,11 +154,27 @@ $(document).ready(function () {
 
     function iconCopyHandler() {
         var value = $(this).attr("animateurl");
-        var $temp = $("<input>");
-          $("body").append($temp);
-          $temp.val(value).select();
-          document.execCommand("copy");
-          $temp.remove();
+        var $input = $("<input>");
+        $("body").append($input);
+        $input.val(value);
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+        var el = $input.get(0);
+        var editable = el.contentEditable;
+        var readOnly = el.readOnly;
+        el.contentEditable = true;
+        el.readOnly = false;
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        el.setSelectionRange(0, 999999);
+        el.contentEditable = editable;
+        el.readOnly = readOnly;} else {
+            $input.select();
+        }
+        document.execCommand("copy");
+        $input.remove();
     }
 
     function gifClickHandler() {
