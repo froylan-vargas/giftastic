@@ -14,6 +14,7 @@ $(document).ready(function () {
     ];
 
     var favoriteGifs = [];
+    var selectedType = "multiple";
 
     function start() {
         var storedCategories = getCategoriesFromStorage();
@@ -57,7 +58,7 @@ $(document).ready(function () {
     }
 
     function createGifComponentElements(gif, isFav) {
-        var rating = $('<p>').text(`Rating:${gif.rating}`);
+        var rating = $('<p>').text(`Rating: ${gif.rating}`);
         var image = createGifImgElement(gif);
         var iconsDiv = createIconsDiv(gif, isFav);
         return { rating, image, iconsDiv };
@@ -122,9 +123,19 @@ $(document).ready(function () {
         giphyCall(queryUrl);
     }
 
+    function getTypeHandler(){
+        var typeSelected = $(this).val();
+        selectedType = typeSelected;
+        if (typeSelected === 'multiple'){
+            $("#limitRequest").show();
+        } else {
+            $("#limitRequest").hide();
+        }
+    }
+
     function addCategoryHandler(event) {
         event.preventDefault();
-        var category = $("#category-input").val().trim();
+        var category = $("#category-input").val().trim().toLowerCase();
         if (category.length) {
             categories.push(category);
             saveToLocalStorage('categories', categories);
@@ -225,12 +236,27 @@ $(document).ready(function () {
         });
     }
 
+    function isRandomTypeSelected()
+    {
+        return selectedType === 'random';
+    }
+
+    function getGiphyQueryMethod(){
+        return isRandomTypeSelected() ? "random" : "search";
+    }
+
     //GiphyAPI
     function createGiphyUrl(category) {
-        const giphyUrl = "https://api.giphy.com/v1/gifs/search?";
-        const limit = $("#limitRequest").val();
+        var giphyUrl = "https://api.giphy.com/v1/gifs/"
+        const queryMethod = getGiphyQueryMethod();
         const key = "dc6zaTOxFJmzC";
-        return `${giphyUrl}api_key=${key}&q=${category}&limit=${limit}`;
+        if (!isRandomTypeSelected()){
+            const limit = $("#limitRequest").val();
+            giphyUrl+= `${queryMethod}?api_key=${key}&q=${category}&limit=${limit}`;
+        } else {
+            giphyUrl+= `${queryMethod}?api_key=${key}&tag=${category}`;
+        }
+        return giphyUrl;
     }
 
     function giphyCall(queryUrl) {
@@ -241,19 +267,28 @@ $(document).ready(function () {
     }
 
     function giphyResponseHandler(gifs) {
-        gifs.data.forEach(gif => {
-            const gifObject = {
+        if (isRandomTypeSelected()){
+            appendGifComponent(createResponseGifObject(gifs.data));
+        } else {
+            gifs.data.forEach(gif => {
+                appendGifComponent(createResponseGifObject(gif));
+            });
+        }
+    }
+
+    function createResponseGifObject(gif){
+        const rating = gif.rating ? gif.rating : "NOT PROVIDED";
+            return  {
                 id: gif.id,
                 stillUrl: gif.images.fixed_height_still.url,
-                animateUrl: gif.images.downsized.url,
-                rating: gif.rating
+                animateUrl: gif.images.original.url,
+                rating
             }
-            appendGifComponent(gifObject);
-        });
     }
 
     //Bindings
     $("#add-category").on("click", addCategoryHandler);
+    $("#getType").on("change", getTypeHandler);  
 
     start();
 });

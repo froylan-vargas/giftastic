@@ -19,7 +19,7 @@
     </header>
 
     <div id="clipboard">
-        
+
     </div>
 
     <section id="categories">
@@ -28,8 +28,14 @@
                 <div id="buttons-view"></div>
             </div>
             <div class="col-4 text-center colLimitRequest">
-                <div class="vertical">
-                    <h6>Gifs to display</h6>
+                <div class="horizontal">
+                    <h6 style="margin-bottom: 10px">What do you want?</h6>
+                    
+                    <select  id="getType" style="margin-bottom: 10px">
+                        <option value="multiple">Multiple</option>
+                        <option value="random">One random</option>
+                    </select>
+                    
                     <select id="limitRequest">
                         <option value="10">10</option>
                         <option value="15">15</option>
