@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Spirax');
+
 .gifComponent > p {
     padding: 0px;
     margin: 0px;
@@ -25,27 +27,26 @@
 }
 
 #favorites{
-    background: 
-radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%),
-radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%),
-radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%),
-radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%),
-radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%),
-
-radial-gradient(circle closest-side at 60% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
-radial-gradient(circle closest-side at 40% 43%, #b03 26%, rgba(187,0,51,0) 27%) 50px 50px,
-radial-gradient(circle closest-side at 40% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
-radial-gradient(circle closest-side at 60% 22%, #d35 45%, rgba(221,51,85,0) 46%) 50px 50px,
-radial-gradient(circle closest-side at 50% 35%, #d35 30%, rgba(221,51,85,0) 31%) 50px 50px;
-background-color:#b03;
-background-size:100px 100px;
-color:white;
+    background: linear-gradient(89deg, #fb1 0%, #007bff 100%);
+    color: white;
+    font-weight: bolder;
 }
 
 .icon{
     margin: 10px 15px;
     font-size: 26px;
     cursor: pointer;
+}
+
+.categoryDelete{
+    width:35px;
+    height:30px;
+    margin:0px;
+    padding:0px;
+}
+
+.iconDelete{
+    font-size:14px;
 }
 
 
@@ -55,6 +56,11 @@ color:white;
     background: #007bff;
 }
 ::-webkit-scrollbar-thumb:horizontal{
+    background: #fb1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:vertical{
     background: #fb1;
     border-radius: 10px;
 }
@@ -85,6 +91,26 @@ img{
     font-weight: bolder;
 }
 
+header{
+    margin-bottom: 20px;
+    font-weight: bolder;
+    background: linear-gradient(89deg, #fb1 0%,#007bff 100%);
+    color: white;
+}
+
+#headerBrand{
+    font-family: 'Spirax', cursive;
+    font-size: 30px;
+    
+}
+
+#appTitle{
+    padding-left: 15px;
+    border-left: 4px solid white;
+    width: fit-content;
+    height: 100%;
+}
+
 .vertical{
     display: flex;
     align-items: center;
@@ -92,7 +118,7 @@ img{
     flex-direction: row;
     padding: 0px;
     text-align: center;
-    height: 100%;
+    height: 100% !important;
 }
 
 .horizontal{
@@ -114,6 +140,8 @@ img{
     padding: 0px;
     padding-left: 20px;
     margin: 0px;
+    height: 160px;
+    overflow-y: scroll;
 }
 
 h6{
@@ -131,7 +159,7 @@ label{
 }
 
 #addCategory{
-    height: 100px;
+    height: 100px !important;
     color: white;
     font-weight: bolder;
     background:

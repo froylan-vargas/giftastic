@@ -112,7 +112,15 @@ $(document).ready(function () {
             .attr("data-category", category)
             .text(category)
             .on('click', categoryClickHandler);
-        $("#buttons-view").append(categoryButton);
+
+        var deleteCategoryButton = $("<button>")
+            .addClass("btn btn-danger categoryDelete")
+            .attr("data-category", category)
+            .on("click", onDeleteCategoryHandler)
+            .append($('<i>')
+                .addClass("far fa-window-close vertical iconDelete"));
+        
+        $("#buttons-view").append(categoryButton, deleteCategoryButton);
     }
 
     //Handlers
@@ -123,10 +131,10 @@ $(document).ready(function () {
         giphyCall(queryUrl);
     }
 
-    function getTypeHandler(){
+    function getTypeHandler() {
         var typeSelected = $(this).val();
         selectedType = typeSelected;
-        if (typeSelected === 'multiple'){
+        if (typeSelected === 'multiple') {
             $("#limitRequest").show();
         } else {
             $("#limitRequest").hide();
@@ -149,7 +157,7 @@ $(document).ready(function () {
         if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
             alert("Feature not supported on iOS");
             return;
-        } 
+        }
         $.ajax({
             url: gifUrl,
             method: 'GET',
@@ -212,10 +220,17 @@ $(document).ready(function () {
 
     function removeFromFavHandler() {
         var gifId = $(this).attr("gifId");
-        favoriteGifs = deleteFromArray(favoriteGifs, gifId);
+        favoriteGifs = deleteFromArrayById(favoriteGifs, gifId);
         var elementToDelete = $(`#favoriteGifs div.gifComponent[gifid = "${gifId}"]`);
         elementToDelete.remove();
         saveToLocalStorage('favoriteGifs', favoriteGifs);
+    }
+
+    function onDeleteCategoryHandler() {
+        var category = $(this).attr("data-category");
+        $(`#buttons-view [data-category='${category}']`).remove();
+        categories = deleteFromArrayElement(categories,category);
+        saveToLocalStorage('categories', categories);
     }
 
     //Helpers
@@ -230,18 +245,23 @@ $(document).ready(function () {
         localStorage.setItem(key, JSON.stringify(element));
     }
 
-    function deleteFromArray(array, id) {
+    function deleteFromArrayById(array, id) {
         return array.filter(elem => {
             return elem.id !== id;
         });
     }
 
-    function isRandomTypeSelected()
-    {
+    function deleteFromArrayElement(array, element){
+        return array.filter(elem => {
+            return elem !== element
+        });
+    }
+
+    function isRandomTypeSelected() {
         return selectedType === 'random';
     }
 
-    function getGiphyQueryMethod(){
+    function getGiphyQueryMethod() {
         return isRandomTypeSelected() ? "random" : "search";
     }
 
@@ -250,11 +270,11 @@ $(document).ready(function () {
         var giphyUrl = "https://api.giphy.com/v1/gifs/"
         const queryMethod = getGiphyQueryMethod();
         const key = "dc6zaTOxFJmzC";
-        if (!isRandomTypeSelected()){
+        if (!isRandomTypeSelected()) {
             const limit = $("#limitRequest").val();
-            giphyUrl+= `${queryMethod}?api_key=${key}&q=${category}&limit=${limit}`;
+            giphyUrl += `${queryMethod}?api_key=${key}&q=${category}&limit=${limit}`;
         } else {
-            giphyUrl+= `${queryMethod}?api_key=${key}&tag=${category}`;
+            giphyUrl += `${queryMethod}?api_key=${key}&tag=${category}`;
         }
         return giphyUrl;
     }
@@ -267,7 +287,7 @@ $(document).ready(function () {
     }
 
     function giphyResponseHandler(gifs) {
-        if (isRandomTypeSelected()){
+        if (isRandomTypeSelected()) {
             appendGifComponent(createResponseGifObject(gifs.data));
         } else {
             gifs.data.forEach(gif => {
@@ -276,19 +296,19 @@ $(document).ready(function () {
         }
     }
 
-    function createResponseGifObject(gif){
+    function createResponseGifObject(gif) {
         const rating = gif.rating ? gif.rating : "NOT PROVIDED";
-            return  {
-                id: gif.id,
-                stillUrl: gif.images.fixed_height_still.url,
-                animateUrl: gif.images.original.url,
-                rating
-            }
+        return {
+            id: gif.id,
+            stillUrl: gif.images.fixed_height_still.url,
+            animateUrl: gif.images.original.url,
+            rating
+        }
     }
 
     //Bindings
     $("#add-category").on("click", addCategoryHandler);
-    $("#getType").on("change", getTypeHandler);  
+    $("#getType").on("change", getTypeHandler);
 
     start();
 });
