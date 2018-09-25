@@ -296,7 +296,7 @@ $(document).ready(function () {
         return {
             id: gif.id,
             stillUrl: gif.images.fixed_height_still.url,
-            animateUrl: gif.images.original.url,
+            animateUrl: gif.images.downsized.url,
             rating
         }
     }
