@@ -140,6 +140,9 @@ header{
     padding: 0px;
     padding-left: 20px;
     margin: 0px;
+}
+
+#buttons-view{
     height: 160px;
     overflow-y: scroll;
 }
