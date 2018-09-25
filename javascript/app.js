@@ -135,6 +135,10 @@ $(document).ready(function () {
 
     function iconDownloadHandler() {
         var gifUrl = $(this).attr("animateurl");
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            alert("Feature not supported on iOS");
+            return;
+        } 
         $.ajax({
             url: gifUrl,
             method: 'GET',
@@ -158,19 +162,20 @@ $(document).ready(function () {
         $("#clipboard").append($input);
         $input.val(value);
         if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-        var el = $input.get(0);
-        var editable = el.contentEditable;
-        var readOnly = el.readOnly;
-        el.contentEditable = true;
-        el.readOnly = true;
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        el.setSelectionRange(0, 999999);
-        el.contentEditable = editable;
-        el.readOnly = readOnly;} else {
+            var el = $input.get(0);
+            var editable = el.contentEditable;
+            var readOnly = el.readOnly;
+            el.contentEditable = true;
+            el.readOnly = true;
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            el.setSelectionRange(0, 999999);
+            el.contentEditable = editable;
+            el.readOnly = readOnly;
+        } else {
             $input.select();
         }
         document.execCommand("copy");
