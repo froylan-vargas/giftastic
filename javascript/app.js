@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
     var categories = [
+        'love',
+        'disappointment',
         'happy',
         'sadness',
-        'love',
         'anger',
-        'disappointment',
     ];
 
     var favoriteGifs = [];
