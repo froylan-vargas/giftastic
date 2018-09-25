@@ -155,14 +155,14 @@ $(document).ready(function () {
     function iconCopyHandler() {
         var value = $(this).attr("animateurl");
         var $input = $("<input>");
-        $("body").append($input);
+        $("#clipboard").append($input);
         $input.val(value);
         if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
         var el = $input.get(0);
         var editable = el.contentEditable;
         var readOnly = el.readOnly;
         el.contentEditable = true;
-        el.readOnly = false;
+        el.readOnly = true;
         var range = document.createRange();
         range.selectNodeContents(el);
         var sel = window.getSelection();
