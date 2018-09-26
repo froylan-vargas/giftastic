@@ -10,6 +10,7 @@ $(document).ready(function () {
 
     var favoriteGifs = [];
     var selectedType = "multiple";
+    var currentCategory = '';
 
     function start() {
         setTheme();
@@ -20,14 +21,14 @@ $(document).ready(function () {
     }
 
     //Create elements
-    function setTheme(){
+    function setTheme() {
         var theme = localStorage.getItem('theme');
         if (theme) {
             const body = document.querySelector('body');
             body.style.setProperty('--primaryColor', theme.split('"').join('').trim());
         }
     }
-    
+
     function renderButtons() {
         categories.forEach(category => {
             createButton(category);
@@ -132,6 +133,8 @@ $(document).ready(function () {
     function categoryClickHandler() {
         $("#gifComponents").empty();
         var category = $(this).attr("data-category");
+        $("#searchTitle").text(`You search for: ${category}`);
+        currentCategory = category;
         const queryUrl = createGiphyUrl(category);
         giphyCall(queryUrl);
     }
@@ -144,6 +147,11 @@ $(document).ready(function () {
         } else {
             $("#limitRequest").hide();
         }
+        actionsForConfigChange();
+    }
+
+    function limitRequestHandler(){
+        actionsForConfigChange();
     }
 
     function addCategoryHandler(event) {
@@ -261,6 +269,14 @@ $(document).ready(function () {
         }).length > 0
     }
 
+    function actionsForConfigChange(){
+        if (currentCategory) {
+            $("#gifComponents").empty();
+            const queryUrl = createGiphyUrl(currentCategory);
+            giphyCall(queryUrl);
+        }
+    }
+
     function switchGifState(gifState, gif) {
         var attributeFilter = gifState === "still" ? "animate" : "still";
         var src = gif.attr(`data-${attributeFilter}`);
@@ -337,7 +353,7 @@ $(document).ready(function () {
     $("#brand").on("click", brandHandler);
     $("#add-category").on("click", addCategoryHandler);
     $("#getType").on("change", getTypeHandler);
-
+    $("#limitRequest").on("change", limitRequestHandler);
     start();
 });
 
