@@ -114,7 +114,7 @@ $(document).ready(function () {
             .on("click", onDeleteCategoryHandler)
             .append($('<i>')
                 .addClass("far fa-window-close vertical iconDelete"));
-        
+
         $("#buttons-view").append(categoryButton, deleteCategoryButton);
     }
 
@@ -203,14 +203,18 @@ $(document).ready(function () {
     }
 
     function favHandler() {
-        const rating = $(this).attr("rating");
-        const stillUrl = $(this).attr("stillUrl");
-        const animateUrl = $(this).attr("animateUrl");
         const id = $(this).attr("gifId");
-        const gif = { id, stillUrl, animateUrl, rating };
-        favoriteGifs.push(gif);
-        saveToLocalStorage('favoriteGifs', favoriteGifs);
-        appendGifComponent(gif, true);
+        if (!isInFavorites(id)) {
+            const rating = $(this).attr("rating");
+            const stillUrl = $(this).attr("stillUrl");
+            const animateUrl = $(this).attr("animateUrl");
+            const gif = { id, stillUrl, animateUrl, rating };
+            favoriteGifs.push(gif);
+            saveToLocalStorage('favoriteGifs', favoriteGifs);
+            appendGifComponent(gif, true);
+        } else {
+            alert("Gif already in favorites");
+        }
     }
 
     function removeFromFavHandler() {
@@ -224,11 +228,17 @@ $(document).ready(function () {
     function onDeleteCategoryHandler() {
         var category = $(this).attr("data-category");
         $(`#buttons-view [data-category='${category}']`).remove();
-        categories = deleteFromArrayElement(categories,category);
+        categories = deleteFromArrayElement(categories, category);
         saveToLocalStorage('categories', categories);
     }
 
     //Helpers
+    function isInFavorites(id) {
+        return favoriteGifs.filter(fav => {
+            return fav.id === id;
+        }).length > 0
+    }
+
     function switchGifState(gifState, gif) {
         var attributeFilter = gifState === "still" ? "animate" : "still";
         var src = gif.attr(`data-${attributeFilter}`);
@@ -246,7 +256,7 @@ $(document).ready(function () {
         });
     }
 
-    function deleteFromArrayElement(array, element){
+    function deleteFromArrayElement(array, element) {
         return array.filter(elem => {
             return elem !== element
         });
