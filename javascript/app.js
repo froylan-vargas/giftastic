@@ -12,6 +12,7 @@ $(document).ready(function () {
     var selectedType = "multiple";
 
     function start() {
+        setTheme();
         var storedCategories = getCategoriesFromStorage();
         categories = storedCategories.length > 1 ? storedCategories : categories;
         renderButtons();
@@ -19,6 +20,14 @@ $(document).ready(function () {
     }
 
     //Create elements
+    function setTheme(){
+        var theme = localStorage.getItem('theme');
+        if (theme) {
+            const body = document.querySelector('body');
+            body.style.setProperty('--primaryColor', theme.split('"').join('').trim());
+        }
+    }
+    
     function renderButtons() {
         categories.forEach(category => {
             createButton(category);
@@ -233,6 +242,18 @@ $(document).ready(function () {
         saveToLocalStorage('categories', categories);
     }
 
+    function brandHandler() {
+        const body = document.querySelector('body');
+        const currentColor = body.style.getPropertyValue('--primaryColor');
+        if (currentColor !== 'black') {
+            body.style.setProperty('--primaryColor', "black");
+            saveToLocalStorage('theme', 'black');
+        } else {
+            body.style.setProperty('--primaryColor', "#fb1");
+            saveToLocalStorage('theme', '#fb1');
+        }
+    }
+
     //Helpers
     function isInFavorites(id) {
         return favoriteGifs.filter(fav => {
@@ -313,6 +334,7 @@ $(document).ready(function () {
     }
 
     //Bindings
+    $("#brand").on("click", brandHandler);
     $("#add-category").on("click", addCategoryHandler);
     $("#getType").on("change", getTypeHandler);
 
