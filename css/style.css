@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Spirax');
 
+@media screen and (max-width: 576px) {
+    #gifsSection img{
+        width: 190px !important;
+    }
+  }
+
+*{
+    box-sizing: border-box;
+}
+
+.bootRow{
+    margin:0px;
+}
+
 .gifComponent > p {
     padding: 0px;
     margin: 0px;
@@ -41,7 +55,7 @@
 .categoryDelete{
     width:35px;
     height:30px;
-    margin:0px;
+    margin:5px;
     padding:0px;
 }
 
@@ -74,7 +88,7 @@
 
 img{
     height: 200px;
-    width: 220px;
+    width: 250px;
 }
 
 #categories{
@@ -92,7 +106,7 @@ img{
 }
 
 header{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: bolder;
     background: linear-gradient(89deg, #fb1 0%,#007bff 100%);
     color: white;
@@ -131,21 +145,17 @@ header{
     height: 100%;
 }
 
-.colLimitRequest{
-    padding: 0px 20px;
-    padding-left: 0px;
-}
+
 
 .buttons-view-column{
-    padding: 0px;
-    padding-left: 20px;
-    margin: 0px;
+   padding: 0px;
+    
 }
 
 #buttons-view{
     height: 160px;
     overflow-y: scroll;
-    margin-right: 30px;
+    margin: 0px 10px;
 }
 
 h6{
