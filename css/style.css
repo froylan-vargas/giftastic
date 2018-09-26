@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Spirax');
 
+:root {
+    --primaryColor: #fb1;
+    --secondaryColor: #007bff;
+}
 
 *{
     box-sizing: border-box;
+}
+
+#brand{
+    cursor: pointer;
 }
 
 .bootRow{
@@ -24,19 +32,19 @@
     margin-right: 10px;
 }
 
-#favoriteGifs > .gifComponent > div > .icon{
+#favoriteGifs .icon{
     margin: 5px;
     font-size: 14px;
     cursor: pointer;
 }
 
-#favoriteGifs > .gifComponent > img{
+#favoriteGifs img{
     max-width: 100px !important;
     height: 100px !important;
 }
 
 #favorites{
-    background: linear-gradient(89deg, #fb1 0%, #007bff 100%);
+    background: linear-gradient(89deg,var(--primaryColor) 0%, var(--secondaryColor) 100%);
     color: white;
     font-weight: bolder;
 }
@@ -62,15 +70,15 @@
 ::-webkit-scrollbar{
     height: 12px;
     width: 4px;
-    background: #007bff;
+    background: var(--secondaryColor);
 }
 ::-webkit-scrollbar-thumb:horizontal{
-    background: #fb1;
+    background: var(--primaryColor);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:vertical{
-    background: #fb1;
+    background: var(--primaryColor);
     border-radius: 10px;
 }
 
@@ -95,14 +103,18 @@ img{
     margin: 5px;
     cursor: pointer;
     color: white;
-    background: linear-gradient(89deg, #007bff 0%, #fb1 100%);
+    background: linear-gradient(89deg, var(--secondaryColor) 0%, var(--primaryColor) 100%);
     font-weight: bolder;
+}
+
+#add-category{
+    background: linear-gradient(89deg,var(--primaryColor) 0%, var(--secondaryColor) 100%);
 }
 
 header{
     margin-bottom: 10px;
     font-weight: bolder;
-    background: linear-gradient(89deg, #fb1 0%,#007bff 100%);
+    background: linear-gradient(89deg, var(--primaryColor) 0%,var(--secondaryColor) 100%);
     color: white;
 }
 
@@ -163,7 +175,7 @@ h6{
 }
 
 label{
-    background-color: #007bff;
+    background: linear-gradient(89deg,var(--primaryColor) 0%, var(--secondaryColor) 100%);
 }
 
 #addCategory{
@@ -171,12 +183,12 @@ label{
     color: white;
     font-weight: bolder;
     background:
-    radial-gradient(circle farthest-side at 0% 50%,#fb1 23.5%,rgba(240,166,17,0) 0)21px 30px,
+    radial-gradient(circle farthest-side at 0% 50%,var(--primaryColor) 23.5%,rgba(240,166,17,0) 0)21px 30px,
     radial-gradient(circle farthest-side at 0% 50%,#B71 24%,rgba(240,166,17,0) 0)19px 30px,
-    linear-gradient(#fb1 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,#fb1 0)0 0,
-    linear-gradient(150deg,#fb1 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#fb1 0)0 0,
-    linear-gradient(30deg,#fb1 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#fb1 0)0 0,
-    linear-gradient(90deg,#B71 2%,#fb1 0,#fb1 98%,#B71 0%)0 0 #fb1;
+    linear-gradient(var(--primaryColor) 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,var(--primaryColor) 0)0 0,
+    linear-gradient(150deg,var(--primaryColor) 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,var(--primaryColor) 0)0 0,
+    linear-gradient(30deg,var(--primaryColor) 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,var(--primaryColor) 0)0 0,
+    linear-gradient(90deg,#B71 2%,var(--primaryColor) 0,var(--primaryColor) 98%,#B71 0%)0 0 var(--primaryColor);
     background-size:40px 60px;
 }
 
