@@ -144,6 +144,7 @@ $(document).ready(function () {
         selectedType = typeSelected;
         if (typeSelected === 'multiple') {
             $("#limitRequest").show();
+            $("#limitRequest").val("10");
         } else {
             $("#limitRequest").hide();
         }
