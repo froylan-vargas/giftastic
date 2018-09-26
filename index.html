@@ -14,8 +14,9 @@
 </head>
 
 <body>
+
     <header>
-        <div class="row">
+        <div class="row bootRow">
             <div id="headerBrand" class="col-3" style="padding:0px;">
                 <p class="vertical" style="height:100%; margin:0px;">FVG</p>
             </div>
@@ -23,37 +24,31 @@
                 <div id="appTitle">
                     <h1 style="margin:0px;">Giftastic emotions</h1>
                 </div>
-                
             </div>
         </div>
     </header>
 
-
     <div id="clipboard">
-
     </div>
 
     <section id="categories">
-        <div class="row">
-            <div class="col-8 text-left buttons-view-column">
-                <div id="buttons-view"></div>
-            </div>
-            <div class="col-4 text-center colLimitRequest">
+        <div class="row bootRow">
+            <div class="col-4 text-center">
                 <div class="horizontal">
                     <h6 style="margin-bottom: 10px">What do you want?</h6>
-                    
-                    <select  id="getType" style="margin-bottom: 10px">
+                    <select id="getType" style="margin-bottom: 10px">
                         <option value="multiple">Multiple</option>
                         <option value="random">One random</option>
                     </select>
-                    
                     <select id="limitRequest">
                         <option value="10">10</option>
                         <option value="15">15</option>
                         <option value="20">20</option>
                     </select>
                 </div>
-
+            </div>
+            <div class="col-8 text-left buttons-view-column">
+                <div id="buttons-view"></div>
             </div>
         </div>
     </section>
@@ -68,18 +63,34 @@
 
     <section id="favorites" class="text-center">
         <h3>Favorite stored gifs</h3>
-        <div id="favoriteGifs">
-        </div>
+        <div id="favoriteGifs"></div>
     </section>
 
     <section id='gifsSection'>
-        <div id="gifComponents" class="row text-center">
-
-        </div>
+        <div id="gifComponents" class="row bootRow text-center"></div>
     </section>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./javascript/app.js"></script>
 </body>
+
+<!--<body>
+    
+
+
+    
+
+    
+
+    
+
+  
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./javascript/app.js"></script>
+</body>-->
 
 </html>
