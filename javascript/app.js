@@ -4,7 +4,7 @@ $(document).ready(function () {
         'love',
         'disappointment',
         'happy',
-        'sadness',
+        'sad',
         'anger',
     ];
 
