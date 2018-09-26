@@ -66,6 +66,7 @@ $(document).ready(function () {
             .attr("data-state", "still")
             .attr("data-still", gif.stillUrl)
             .attr("data-animate", gif.animateUrl)
+            .addClass("img-fluid")
             .on('click', gifClickHandler)
     }
 
