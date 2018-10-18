@@ -7,7 +7,7 @@ Web app that let's you to pick a category and look for gifs from gipy,
 then you can add wanted gifs to favourite section, copy the gif or store it 
 to your device.
 
-###Technical approach.
+### Technical approach.
 I've created one UI gif component, and then I draw all the gifs in the UI dynamically using jQuery. This allows to have a cleaner html and more readable code. 
 
 ### Improvements Version 1.1 Added 2018-09-26
