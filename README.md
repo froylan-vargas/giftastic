@@ -3,8 +3,8 @@
 Live url: https://froylandcito.github.io/giftastic
 
 ## Description
-Web app that let's you to pick a category and look for gifs from gipy, 
-then you can add wanted gifs to favourite section, copy the gif or store it 
+Web app that let's you pick a category and look for gifs from giphy api, 
+then you can add wanted gifs to fav section, copy the gif or store it 
 to your device.
 
 ### Technical approach.
