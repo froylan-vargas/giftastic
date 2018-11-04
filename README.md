@@ -1,6 +1,6 @@
 # giftastic
 
-Live url: https://froylandcito.github.io/giftastic
+Live url: https://froylan-vargas.github.io/giftastic
 
 ## Description
 Web app that let's you pick a category and look for gifs from giphy api, 
